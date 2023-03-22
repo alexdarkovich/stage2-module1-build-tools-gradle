@@ -4,8 +4,6 @@ repositories {
 
 subprojects {
     apply plugin: 'java'
-    apply plugin: 'maven-publish'
-    apply plugin: 'application'
 
     dependencies {
         testImplementation('org.junit.jupiter:junit-jupiter:5.8.1')
