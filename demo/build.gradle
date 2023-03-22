@@ -2,25 +2,30 @@ plugins {
     id 'java'
 }
 
-group 'com.epam'
-version '1.0'
+group 'com.epam' // groupId
+version '1.0'  // version
 
 java {
     sourceCompatibility = 1.8
 }
 repositories {
-    mavenLocal()
-    mavenCentral()
+    mavenLocal() //позволяем скачивать зависимости с локального репозитория
+    mavenCentral() //позволяем скачивать зависимости с удаленного репозитория
 }
 compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = 'UTF-8'
 
 dependencies {
-    implementation project(":utils")
+    implementation project(":utils") // добавляем наш второй модуль "utils", как зависимость
     testImplementation('org.junit.jupiter:junit-jupiter:5.8.1')
 }
 test {
-    useJUnitPlatform()
+    useJUnitPlatform()//configures the project to use JUnit 5 as the test framework.
+    // The useJUnitPlatform() method is used to enable JUnit 5 for the project.
 }
-
+//configures the compileJava task to depend on the publishToMavenLocal task of the utils project.
+// This means that the compileJava task will not run until the publishToMavenLocal task
+// of the utils project has completed. This is useful in case the utils project needs to be
+// republished to the local repository before the demo project is built and the StringUtils
+// class is imported.
 compileJava {}.dependsOn(':utils:publishToMavenLocal')
