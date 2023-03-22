@@ -1,4 +1,26 @@
-//add everything here
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+java {
+    sourceCompatibility = 1.8
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+
+
+//add Apache Apache Commons Lang 3.10 (or higher) dependency
+dependencies {
+    implementation project(":utils")
+    testImplementation('org.junit.jupiter:junit-jupiter:5.8.1')
+
+}
+
 
 test {
     useJUnitPlatform()
