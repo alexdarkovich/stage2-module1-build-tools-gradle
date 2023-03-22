@@ -1,27 +1,24 @@
 plugins {
     id 'java'
-    id 'maven-publish'
 }
+
+group 'com.epam'
+version '1.0'
 
 java {
     sourceCompatibility = 1.8
 }
-
 repositories {
     mavenLocal()
     mavenCentral()
 }
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
 
-
-
-//add Apache Apache Commons Lang 3.10 (or higher) dependency
 dependencies {
     implementation project(":utils")
     testImplementation('org.junit.jupiter:junit-jupiter:5.8.1')
-
 }
-
-
 test {
     useJUnitPlatform()
 }
