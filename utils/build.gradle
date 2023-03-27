@@ -1,21 +1,29 @@
 plugins {
-    id 'java' //provides a set of tasks for building and testing Java applications
-    id 'maven-publish' // provides tasks for publishing the project's artifacts to a Maven repository
+    // id for library
+    id 'java-library'
+    // id for maven to publish jar to local repository
+    id 'maven-publish'
 }
+version = '1.3.5'
+
 java {
-    sourceCompatibility = 1.8 // specifies that the project's source code should be compatible with Java 8.
+// provide sourceCompatibility
+    sourceCompatibility = JavaVersion.VERSION_11
 }
 repositories {
     mavenCentral()//specifies that the Maven Central repository will be used to search for dependencies.
 }
 publishing {
     publications {
-        maven(MavenPublication) {//specify the details of the artifact that should be published
-            groupId 'com.epam'
-            artifactId 'utils'
-            version '1.3.5'
-            from components.java//specifies that the artifact should include all of the Java
-            // classes and resources that are in the project's components.java component.
+        maven(MavenPublication) {
+// provide groupId
+// provide artifactId
+// provide version
+            groupId = 'com.epam.utils'
+            artifactId = project.name
+            version = project.version
+
+            from components.java
         }
     }
 }
@@ -23,22 +31,17 @@ dependencies {
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
 }
 
-compileJava.options.encoding = 'UTF-8' //чтобы всегда ютф 8 был и никаких лишних символов не залетело
-compileTestJava.options.encoding = 'UTF-8' //чтобы всегда ютф 8 был и никаких лишних символов не залетело
-
-jar {//configures the properties of the JAR file that will be produced by the project
-    enabled = true
-    manifest {//configure the manifest file of the JAR file. The manifest file is a special file
-        // that contains meta-information about the JAR file, such as its version, vendor, and dependencies.
-        attributes 'Implementation-Title': 'Utils',
-                'Implementation-Version' : '1.3.5'
+jar {
+    manifest {
+        //provide manifest with such attributes as 'Implementation-Title', 'Implementation-Version'
+        attributes('Implementation-Title': project.name,
+                'Implementation-Version': project.version)
     }
 }
+
 test {
     useJUnitPlatform()//configures the project to use JUnit 5 as the test framework.
     // The useJUnitPlatform() method is used to enable JUnit 5 for the project.
 }
-//The publishMavenPublicationToMavenLocal task is used to publish the project's artifacts
-// to the local Maven repository. The mustRunAfter method is used to specify that the
-// task should run after the build task.
+
 publishMavenPublicationToMavenLocal {}.mustRunAfter('build')

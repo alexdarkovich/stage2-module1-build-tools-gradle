@@ -1,15 +1,8 @@
 package com.epam.demo;
 
-import import com.epam.utils.StringUtils;
-
-package com.epam.demo;
-
-import java.util.List;
-package com.epam.demo;
-
-import java.util.List;
-
 import com.epam.utils.StringUtils;
+
+import java.util.List;
 
 public class Utils {
     public static void main(String[] args)
